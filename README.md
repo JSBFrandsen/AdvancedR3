@@ -26,5 +26,3 @@ through the `DESCRIPTION` file, installing dependencies is as easy as opening th
     remotes::install_deps()
 
 You'll need to have remotes installed for this to work.
-
-
