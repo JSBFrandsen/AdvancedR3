@@ -27,8 +27,4 @@ through the `DESCRIPTION` file, installing dependencies is as easy as opening th
 
 You'll need to have remotes installed for this to work.
 
-# Resource
 
-For more information on this folder and file workflow and setup, check
-out the [prodigenr](https://rostools.github.io/prodigenr) online
-documentation.
