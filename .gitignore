@@ -2,3 +2,7 @@
 .RData
 .Rproj.user
 .Rbuildignore
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto
