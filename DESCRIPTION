@@ -23,4 +23,5 @@ Imports:
     tidyr
 Suggests: 
     gitcreds,
+    styler,
     usethis
