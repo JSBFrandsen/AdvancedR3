@@ -22,4 +22,5 @@ Imports:
     stringr,
     tidyr
 Suggests: 
+    gitcreds,
     usethis
