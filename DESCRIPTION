@@ -17,10 +17,12 @@ Imports:
     fs,
     ggplot2,
     here,
+    quarto,
     readr,
     readxl,
     snakecase,
     stringr,
+    tarchetypes,
     targets,
     tidyr
 Suggests: 

@@ -7,3 +7,5 @@
 .DS_Store
 .quarto
 data-raw/nmr-omics/
+doc/_targets.yaml
+_targets.yaml

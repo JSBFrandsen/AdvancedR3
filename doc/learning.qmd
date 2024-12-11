@@ -5,30 +5,22 @@ format: html
 ---
 
 ```{r setup}
-#| include: false
-#| echo: false
+targets::tar_config_set(store = here::here("_targets"))
 library(tidyverse)
+library(targets)
 source(here::here("R/functions.R"))
-lipidomics <- read_csv(here::here("data/lipidomics.csv"))
+lipidomics <- tar_read(lipidomics)
 ```
 
-## Basic statistics
+## Results
 
 ```{r}
-descriptive_stats(lipidomics)
+tar_read(df_stats_by_metabolite)  |>
+  mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) |>
+  select(Metabolite = metabolite, `Mean SD` = MeanSD, `IQR` = value_iqr) |>
+  knitr::kable(caption = "Descriptive statistics of the metabolites.")
 ```
 
-## Figure outputs
-
 ```{r}
-#' Plot distributions of value
-#'
-#' @param data 
-#'
-#' @return a plot figure
-plot_distributions <- function(data) {
-  ggplot2::ggplot(data, aes(x = value)) +
-    ggplot2::geom_histogram() +
-    ggplot2::facet_wrap(vars(metabolite), scales = "free")
-}
+tar_read(figure_histogram_by_metabolite)
 ```
