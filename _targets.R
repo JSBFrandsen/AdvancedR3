@@ -69,6 +69,10 @@ list(
         name = figure_histogram_by_metabolite,
         command = plot_distributions(lipidomics)
     ),
+    tar_target(
+        name = lipidomics_wider,
+        command = metabolites_to_wider(column_values_to_snakecase(lipidomics,metabolite))
+    ),
     tar_quarto(
         name = quarto_doc,
         path = "doc/learning.qmd"

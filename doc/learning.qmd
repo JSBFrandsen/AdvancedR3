@@ -26,3 +26,16 @@ tar_read(df_stats_by_metabolite)  |>
 ```{r}
 tar_read(figure_histogram_by_metabolite) 
 ```
+
+## Building the model
+
+```{r}
+log_reg_specs = parsnip::logistic_reg() %>%
+    parsnip::set_engine("glm") 
+```
+
+```{r}
+lipidomics_wide = tar_read(lipidomics_wider)
+
+create_recipe_spec(lipidomics_wide,metabolite_cholesterol)
+```
