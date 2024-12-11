@@ -17,17 +17,21 @@ Imports:
     fs,
     ggplot2,
     here,
+    parsnip,
     quarto,
     readr,
     readxl,
+    recipes,
     snakecase,
     stringr,
     tarchetypes,
     targets,
-    tidyr
+    tidyr,
+    workflows
 Suggests: 
     gitcreds,
     styler,
     usethis
 Depends: 
+    tidymodels,
     tidyverse
