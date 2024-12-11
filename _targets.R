@@ -63,6 +63,10 @@ list(
     tar_target(
         name = df_stats_by_metabolite,
         command = descriptive_stats(lipidomics)
+    ),
+    tar_target(
+        name = figure_histogram_by_metabolite,
+        command = plot_distributions(lipidomics)
     )
 )
 
