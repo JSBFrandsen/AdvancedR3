@@ -11,7 +11,9 @@ descriptive_stats <- function(data) {
             list(
                 mean = mean,
                 sd = sd,
-                iqr = IQR
+                iqr = IQR,
+                q25 = ~ quantile(.x, probs = 1/4),
+                q75 = ~ quantile(.x, probs = 3/4)
             )
         )) %>%
         dplyr::mutate(dplyr::across(

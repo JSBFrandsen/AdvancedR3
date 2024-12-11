@@ -16,11 +16,12 @@ lipidomics <- tar_read(lipidomics)
 
 ```{r}
 tar_read(df_stats_by_metabolite)  |>
-  mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) |>
-  select(Metabolite = metabolite, `Mean SD` = MeanSD, `IQR` = value_iqr) |>
+  mutate(MeanSD = glue::glue("{value_mean} ({value_sd})"),
+         Range = glue::glue("[{value_q25} - {value_q75}]")) |>
+  select(Metabolite = metabolite, `Mean SD` = MeanSD, `IQR` = Range) |>
   knitr::kable(caption = "Descriptive statistics of the metabolites.")
 ```
 
 ```{r}
-tar_read(figure_histogram_by_metabolite)
+tar_read(figure_histogram_by_metabolite) 
 ```
