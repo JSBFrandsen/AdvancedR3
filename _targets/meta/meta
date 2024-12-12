@@ -1,5 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|1d24b4851e5f80f9|||||||||||||||
+.Random.seed|object|f54389ba5a383aa2|||||||||||||||
 calculate_estimates|function|160b6a86ec39ca55|||||||||||||||
 column_values_to_snakecase|function|1cbcfee90352cf60|||||||||||||||
 create_model_workflow|function|b1c4ccb7cbf5f62a|||||||||||||||
@@ -18,6 +18,6 @@ metabolites_to_wider|function|190c8cc4b495bfea|||||||||||||||
 multiple_estimates|stem|5b80a5118d231145|2954b8877e0c4723|76b9881b2bf73ea7|1506084454||t20069.4122139166s|c82e672d71948923|1038|rds|local|vector|||1.68|glm.fit algorithm did not converge. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
 plot_distributions|function|b06f65993fa8d2d0|||||||||||||||
 plot_estimates|function|1e79c00fce2fbfeb|||||||||||||||
-quarto_doc|stem|04367ac20b1f84e7|0fec440e2416d517|711ce718f1a7005e|1582462002|doc/learning.html*doc/learning.qmd|t20069.4338228085s|489bc0b9e0ac2cac|30401|file|local|vector|||9.95||
+quarto_doc|stem|c8b2a339164e4cce|0fec440e2416d517|711ce718f1a7005e|1582462002|doc/learning.html*doc/learning.qmd|t20069.4406098239s|c5bf5c778ea78a93|30400|file|local|vector|||9.29||
 split_by_metabolite|function|4b89cea748a20923|||||||||||||||
 tidy_model_output|function|9ca6f81d922262a7|||||||||||||||
