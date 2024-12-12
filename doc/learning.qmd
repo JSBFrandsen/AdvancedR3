@@ -10,6 +10,7 @@ library(tidyverse)
 library(targets)
 library(tidymodels)
 source(here::here("R/functions.R"))
+lipidomics = tar_read(lipidomics)
 lipidomics_wide <- tar_read(lipidomics_wide)
 ```
 
@@ -42,4 +43,13 @@ model_workflow <- create_model_workflow(
   tidy_model_output()
 
 model_workflow
+```
+
+## Running multiple models
+
+```{r}
+lipidomics %>% 
+    column_values_to_snakecase(metabolite) %>% 
+    dplyr::group_split(metabolite) %>% 
+    map(metabolites_to_wider)
 ```
