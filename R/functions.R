@@ -62,7 +62,7 @@ metabolites_to_wider <- function(data) {
 #' @return specification
 create_recipe_spec <- function(data, metabolite_variable) {
   recipes::recipe(data) %>%
-    recipes::update_role({{metabolite_variable}},
+    recipes::update_role({{ metabolite_variable }},
       age,
       gender,
       new_role = "predictor"
@@ -78,21 +78,21 @@ create_recipe_spec <- function(data, metabolite_variable) {
 #' @param recipe_specs
 #'
 #' @return workflow
-create_model_workflow = function(model_specs,
-                                 recipe_specs) {
-    workflows::workflow() %>%
-        workflows::add_model(model_specs) %>%
-        workflows::add_recipe(recipe_specs)
+create_model_workflow <- function(model_specs,
+                                  recipe_specs) {
+  workflows::workflow() %>%
+    workflows::add_model(model_specs) %>%
+    workflows::add_recipe(recipe_specs)
 }
 #' Tidy model output
 #'
 #' @param workflow_fitted_model
 #'
 #' @return data frame
-tidy_model_output = function(workflow_fitted_model) {
-    workflow_fitted_model %>%
-        workflows::extract_fit_parsnip(workflow_fitted_model) %>%
-        broom::tidy(exponentiate = T)
+tidy_model_output <- function(workflow_fitted_model) {
+  workflow_fitted_model %>%
+    workflows::extract_fit_parsnip(workflow_fitted_model) %>%
+    broom::tidy(exponentiate = T)
 }
 #' Split dataset by metabolites
 #'
@@ -100,10 +100,10 @@ tidy_model_output = function(workflow_fitted_model) {
 #'
 #' @return list of data frames
 split_by_metabolite <- function(data) {
-    data %>%
-        column_values_to_snakecase(metabolite) %>%
-        dplyr::group_split(metabolite) %>%
-        purrr::map(metabolites_to_wider)
+  data %>%
+    column_values_to_snakecase(metabolite) %>%
+    dplyr::group_split(metabolite) %>%
+    purrr::map(metabolites_to_wider)
 }
 #' Generate results
 #'
@@ -111,14 +111,14 @@ split_by_metabolite <- function(data) {
 #'
 #' @return
 generate_model_results <- function(data) {
-    create_model_workflow(
-        parsnip::logistic_reg() %>%
-            parsnip::set_engine("glm"),
-        data %>%
-            create_recipe_spec(tidyselect::starts_with("metabolite_"))
-    ) %>%
-        parsnip::fit(data) %>%
-        tidy_model_output()
+  create_model_workflow(
+    parsnip::logistic_reg() %>%
+      parsnip::set_engine("glm"),
+    data %>%
+      create_recipe_spec(tidyselect::starts_with("metabolite_"))
+  ) %>%
+    parsnip::fit(data) %>%
+    tidy_model_output()
 }
 #' Calculate estimates
 #'
@@ -126,31 +126,34 @@ generate_model_results <- function(data) {
 #'
 #' @return a data frame
 calculate_estimates <- function(data) {
-    model_estimates = data %>%
+  model_estimates <- data %>%
     split_by_metabolite() %>%
-        purrr::map(generate_model_results) %>%
-        purrr::list_rbind() %>%
-        dplyr::filter(stringr::str_detect(term, "metabolite_"))
-    data %>%
-        dplyr::select(metabolite) %>%
-        dplyr::mutate(term = metabolite) %>%
-        column_values_to_snakecase(term) %>%
-        dplyr::mutate(term = stringr::str_c("metabolite_", term)) %>%
-        unique() %>%
-        dplyr::right_join(model_estimates, by = "term")
+    purrr::map(generate_model_results) %>%
+    purrr::list_rbind() %>%
+    dplyr::filter(stringr::str_detect(term, "metabolite_"))
+  data %>%
+    dplyr::select(metabolite) %>%
+    dplyr::mutate(term = metabolite) %>%
+    column_values_to_snakecase(term) %>%
+    dplyr::mutate(term = stringr::str_c("metabolite_", term)) %>%
+    unique() %>%
+    dplyr::right_join(model_estimates, by = "term")
 }
 #' Visualize odds-ratios
 #'
 #' @param data
 #'
 #' @return ggplot object
-plot_estimates = function(data) {
-    ggplot2::ggplot(data, ggplot2::aes(
-        x = estimate,
-        y = metabolite,
-        xmin = estimate - std.error,
-        xmax = estimate + std.error
-    )) +
-        ggplot2::geom_pointrange() +
-        ggplot2::coord_fixed(xlim = c(0,5))
+plot_estimates <- function(data) {
+  ggplot2::ggplot(data, ggplot2::aes(
+    x = estimate,
+    y = metabolite,
+    xmin = estimate - std.error,
+    xmax = estimate + std.error
+  )) +
+    ggplot2::geom_pointrange() +
+    ggplot2::coord_fixed(xlim = c(0, 5)) +
+    ggplot2::theme_minimal() +
+    ggplot2::xlab("Odds-ratio") +
+    ggplot2::ylab("Metabolites")
 }

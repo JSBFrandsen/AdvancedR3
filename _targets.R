@@ -74,12 +74,12 @@ list(
         command = metabolites_to_wider(column_values_to_snakecase(lipidomics,metabolite))
     ),
     tar_target(
-        name = multiple_estimates,
+        name = df_multiple_estimates,
         command = calculate_estimates(lipidomics)
     ),
     tar_target(
         name = figure_odds_ratio_estimates,
-        command = plot_estimates(multiple_estimates)
+        command = plot_estimates(df_multiple_estimates)
     ),
     tar_quarto(
         name = quarto_doc,
