@@ -33,9 +33,12 @@ tar_read(figure_histogram_by_metabolite)
 ## Running multiple models
 
 ```{r}
-lipidomics %>%
-  split_by_metabolite() %>%
-  map(generate_model_results) %>%
-  list_rbind() %>%
-  filter(str_detect(term, "metabolite_"))
+lipidomics %>% 
+    calculate_estimates()
+```
+
+## Fixing metabolite names
+
+```{r}
+
 ```

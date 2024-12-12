@@ -120,3 +120,22 @@ generate_model_results <- function(data) {
         parsnip::fit(data) %>%
         tidy_model_output()
 }
+#' Calculate estimates
+#'
+#' @param data
+#'
+#' @return a data frame
+calculate_estimates <- function(data) {
+    model_estimates = data %>%
+    split_by_metabolite() %>%
+        purrr::map(generate_model_results) %>%
+        purrr::list_rbind() %>%
+        dplyr::filter(stringr::str_detect(term, "metabolite_"))
+    data %>%
+        select(metabolite) %>%
+        mutate(term = metabolite) %>%
+        column_values_to_snakecase(term) %>%
+        mutate(term = stringr::str_c("metabolite_", term)) %>%
+        unique() %>%
+        dplyr::right_join(model_estimates, by = "term")
+}
