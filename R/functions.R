@@ -132,10 +132,25 @@ calculate_estimates <- function(data) {
         purrr::list_rbind() %>%
         dplyr::filter(stringr::str_detect(term, "metabolite_"))
     data %>%
-        select(metabolite) %>%
-        mutate(term = metabolite) %>%
+        dplyr::select(metabolite) %>%
+        dplyr::mutate(term = metabolite) %>%
         column_values_to_snakecase(term) %>%
-        mutate(term = stringr::str_c("metabolite_", term)) %>%
+        dplyr::mutate(term = stringr::str_c("metabolite_", term)) %>%
         unique() %>%
         dplyr::right_join(model_estimates, by = "term")
+}
+#' Visualize odds-ratios
+#'
+#' @param data
+#'
+#' @return ggplot object
+plot_estimates = function(data) {
+    ggplot2::ggplot(data, ggplot2::aes(
+        x = estimate,
+        y = metabolite,
+        xmin = estimate - std.error,
+        xmax = estimate + std.error
+    )) +
+        ggplot2::geom_pointrange() +
+        ggplot2::coord_fixed(xlim = c(0,5))
 }

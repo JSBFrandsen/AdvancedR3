@@ -1,16 +1,22 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|0f099d9fd504afab|||||||||||||||
+.Random.seed|object|ff4468e2ca199ee7|||||||||||||||
+calculate_estimates|function|f60757ece696a9e8|||||||||||||||
 column_values_to_snakecase|function|1cbcfee90352cf60|||||||||||||||
 create_model_workflow|function|b1c4ccb7cbf5f62a|||||||||||||||
 create_recipe_spec|function|f291fa2b0bc1cb1b|||||||||||||||
 descriptive_stats|function|8e25621039ba3858|||||||||||||||
 df_stats_by_metabolite|stem|0164db27fb29ce8b|ce15a181d02b2e03|287857541825d25e|519715527||t20068.4240967752s|7c99faa47fac9def|576|rds|local|vector|||0.01||
 figure_histogram_by_metabolite|stem|aef55fe0aee5dc92|86673d84fb1f96ff|4244973e03cf06cf|-69485739||t20068.3786077357s|b59723b7b85f4de4|137280|rds|local|vector|||0.11||
+figure_odds_ratio_estimates|stem|5f278b6db814e18a|55170d23a4dafe5d|0ea27245f562cf18|-1491071059||t20069.42137297s|018de3e97346a434|99141|rds|local|vector|||0.07||
 file|stem|f6bf5a5688fb274f|09442fac263aded2|2c530c1562a7fbd1|1735323524|data/lipidomics.csv|t20039.3620482245s|2ec1867e6b7db575|24313|file|local|vector|||0.02||
+generate_model_results|function|b42a374281515738|||||||||||||||
 lipidomics|stem|65a50387c837cc7a|0c7a386d4ea38074|f0e124423009cc2f|-1498393010||t20068.356268651s|5efea0df906539e6|4884|rds|local|vector|||0.16||
 lipidomics_wide|stem|f7eccf0bcfa9603b|b4b5b1f3aee9f311|89a22cd617cdf77c|1398489128||t20068.5719422153s|3a3f0742c66612cd|3951|rds|local|vector|||0.12||
 lipidomics_wider|stem|f7eccf0bcfa9603b|b4b5b1f3aee9f311|89a22cd617cdf77c|-1412504409||t20068.553637612s|3a3f0742c66612cd|3951|rds|local|vector|||0.13||
 metabolites_to_wider|function|190c8cc4b495bfea|||||||||||||||
+multiple_estimates|stem|5b80a5118d231145|2954b8877e0c4723|76b9881b2bf73ea7|1506084454||t20069.4122139166s|c82e672d71948923|1038|rds|local|vector|||1.68|glm.fit algorithm did not converge. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
 plot_distributions|function|b06f65993fa8d2d0|||||||||||||||
-quarto_doc|stem|0417f8072bf1a8eb|7e805f3b5b31dedf|d1aa44b0a77ff96f|1582462002|doc/learning.html*doc/learning.qmd|t20069.3445979265s|97239e48de81bf1a|31854|file|local|vector|||10.61||
+plot_estimates|function|0585f543dc90b117|||||||||||||||
+quarto_doc|stem|830de0d7b6c1e5e6|0fec440e2416d517|e3a2a89eb77adcbe|1582462002|doc/learning.html*doc/learning.qmd|t20069.4214769698s|17f077e39a3b6719|30418|file|local|vector|||9.28||
+split_by_metabolite|function|4b89cea748a20923|||||||||||||||
 tidy_model_output|function|9ca6f81d922262a7|||||||||||||||

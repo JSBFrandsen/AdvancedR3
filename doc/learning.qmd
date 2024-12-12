@@ -33,12 +33,5 @@ tar_read(figure_histogram_by_metabolite)
 ## Running multiple models
 
 ```{r}
-lipidomics %>% 
-    calculate_estimates()
-```
-
-## Fixing metabolite names
-
-```{r}
-
+tar_read(figure_odds_ratio_estimates) 
 ```
