@@ -94,3 +94,29 @@ tidy_model_output = function(workflow_fitted_model) {
         workflows::extract_fit_parsnip(workflow_fitted_model) %>%
         broom::tidy(exponentiate = T)
 }
+#' Split dataset by metabolites
+#'
+#' @param data
+#'
+#' @return list of data frames
+split_by_metabolite <- function(data) {
+    data %>%
+        column_values_to_snakecase(metabolite) %>%
+        dplyr::group_split(metabolite) %>%
+        purrr::map(metabolites_to_wider)
+}
+#' Generate results
+#'
+#' @param data
+#'
+#' @return
+generate_model_results <- function(data) {
+    create_model_workflow(
+        parsnip::logistic_reg() %>%
+            parsnip::set_engine("glm"),
+        data %>%
+            create_recipe_spec(tidyselect::starts_with("metabolite_"))
+    ) %>%
+        parsnip::fit(data) %>%
+        tidy_model_output()
+}
