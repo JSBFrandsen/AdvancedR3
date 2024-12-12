@@ -10,32 +10,36 @@ library(tidyverse)
 library(targets)
 library(tidymodels)
 source(here::here("R/functions.R"))
-lipidomics <- tar_read(lipidomics)
+lipidomics_wide <- tar_read(lipidomics_wide)
 ```
 
 ## Results
 
 ```{r}
-tar_read(df_stats_by_metabolite)  |>
-  mutate(MeanSD = glue::glue("{value_mean} ({value_sd})"),
-         Range = glue::glue("[{value_q25} - {value_q75}]")) |>
+tar_read(df_stats_by_metabolite) |>
+  mutate(
+    MeanSD = glue::glue("{value_mean} ({value_sd})"),
+    Range = glue::glue("[{value_q25} - {value_q75}]")
+  ) |>
   select(Metabolite = metabolite, `Mean SD` = MeanSD, `IQR` = Range) |>
   knitr::kable(caption = "Descriptive statistics of the metabolites.")
 ```
 
 ```{r}
-tar_read(figure_histogram_by_metabolite) 
+tar_read(figure_histogram_by_metabolite)
 ```
 
 ## Building the model
 
 ```{r}
-log_reg_specs = parsnip::logistic_reg() %>%
-    parsnip::set_engine("glm") 
-```
+model_workflow <- create_model_workflow(
+  parsnip::logistic_reg() %>%
+    parsnip::set_engine("glm"),
+  lipidomics_wide %>%
+    create_recipe_spec(metabolite_cholesterol)
+) %>%
+  parsnip::fit(lipidomics_wide) %>%
+  tidy_model_output()
 
-```{r}
-lipidomics_wide = tar_read(lipidomics_wider)
-
-create_recipe_spec(lipidomics_wide,metabolite_cholesterol)
+model_workflow
 ```

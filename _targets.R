@@ -70,7 +70,7 @@ list(
         command = plot_distributions(lipidomics)
     ),
     tar_target(
-        name = lipidomics_wider,
+        name = lipidomics_wide,
         command = metabolites_to_wider(column_values_to_snakecase(lipidomics,metabolite))
     ),
     tar_quarto(

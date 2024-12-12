@@ -72,3 +72,25 @@ create_recipe_spec <- function(data, metabolite_variable) {
     ) %>%
     recipes::step_normalize(rsample::starts_with("metabolite_"))
 }
+#' Create model workflow
+#'
+#' @param model_specs
+#' @param recipe_specs
+#'
+#' @return workflow
+create_model_workflow = function(model_specs,
+                                 recipe_specs) {
+    workflows::workflow() %>%
+        workflows::add_model(model_specs) %>%
+        workflows::add_recipe(recipe_specs)
+}
+#' Tidy model output
+#'
+#' @param workflow_fitted_model
+#'
+#' @return data frame
+tidy_model_output = function(workflow_fitted_model) {
+    workflow_fitted_model %>%
+        workflows::extract_fit_parsnip(workflow_fitted_model) %>%
+        broom::tidy(exponentiate = T)
+}
